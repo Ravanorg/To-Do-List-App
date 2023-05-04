@@ -139,6 +139,13 @@ header h1 span {
     color: dodgerblue;
 }
 #hint {
+    margin-left: 650px;
+    font-size: 1.3rem;
+    font-weight: bold;
     text-align: center;
-    color:#3b3b3b;
+    color:red;
+    border: 1.3px solid red;
+    box-shadow: 0 0 5px red;
+    padding: 10px;
+    width:600px;
 }

@@ -72,7 +72,7 @@ task_alt
         <div id="hint">Please add a new task!</div>
         </c:if>
         <c:if test="${empty taskList and !empty completedTaskList}">
-            <div id="hint">No more task to Complete!</div>
+            <div id="hint">No more tasks to Complete!</div>
         </c:if>
         <c:forEach var="task" items="${taskList}">
         <div class="task">
@@ -90,23 +90,28 @@ task_alt
         </c:forEach>
 
     </section>
-    <section id="completed-task">
-        <h2>Completed Tasks</h2>
-        <div class="task completed">
-            <a href="">
-                <label>
-                    <input type="checkbox">Finish the Project
-                </label>
-            </a>
-            <a href="" title="Delete Task">
+    <c:if test="${!empty completedTaskList}">
+        <section id="completed-task">
+            <h2>Completed Tasks</h2>
+
+            <c:forEach var="task" items="${completedTaskList}">
+                <div class="task completed">
+                    <a href="">
+                        <label>
+                            <input type="checkbox">${task.description}
+                        </label>
+                    </a>
+                    <a href="" title="Delete Task">
             <span class="material-symbols-outlined">
                 delete
             </span>
-            </a>
-        </div>
+                    </a>
+                </div>
+            </c:forEach>
 
 
-    </section>
+        </section>
+    </c:if>
 
 </main>
 <footer>
