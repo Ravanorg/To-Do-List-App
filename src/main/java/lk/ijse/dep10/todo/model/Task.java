@@ -14,6 +14,6 @@ public class Task implements Serializable {
     Status status;
 
     public  enum Status{
-        COMPLETED,NOT_COMPLETED
+        completed,not_completed
     }
 }

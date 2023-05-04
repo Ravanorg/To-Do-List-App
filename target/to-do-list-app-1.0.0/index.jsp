@@ -7,6 +7,7 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="lk.ijse.dep10.todo.model.Task" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%!
     private ArrayList<Task> getTaskList(ResultSet rst) throws SQLException {
         ArrayList<Task> taskList = new ArrayList<>();
@@ -22,13 +23,15 @@
 %>
 
 <%
-    BasicDataSource dbcp = (BasicDataSource) request.getAttribute("dbcp");
+    BasicDataSource dbcp = (BasicDataSource) application.getAttribute("dbcp");
     try (Connection connection = dbcp.getConnection()) {
         var statement = connection.createStatement();
         ResultSet rst1 = statement.executeQuery("SELECT  * from task where status='not_completed'");
         var taskList = getTaskList(rst1);
         ResultSet rst2 = statement.executeQuery("SELECT  * from task where status='completed'");
         var completedTaskList = getTaskList(rst2);
+        request.setAttribute("taskList", taskList);
+        request.setAttribute("completedTaskList",completedTaskList);
     }catch (SQLException e) {
         throw new RuntimeException(e);
     }
@@ -65,11 +68,17 @@ task_alt
 <main>
 
     <section id="tasks">
+        <c:if test="${empty taskList and empty completedTaskList}">
         <div id="hint">Please add a new task!</div>
+        </c:if>
+        <c:if test="${empty taskList and !empty completedTaskList}">
+            <div id="hint">No more task to Complete!</div>
+        </c:if>
+        <c:forEach var="task" items="${taskList}">
         <div class="task">
             <a href="">
                 <label>
-                    <input type="checkbox">Finish the Project
+                    <input type="checkbox">${task.description}
                 </label>
             </a>
             <a href="" title="Delete Task">
@@ -78,138 +87,8 @@ task_alt
             </span>
             </a>
         </div>
-        <div class="task">
-            <a href="">
-                <label>
-                    <input type="checkbox">Finish the Project
-                </label>
-            </a>
-            <a href="" title="Delete Task">
-            <span class="material-symbols-outlined">
-                delete
-            </span>
-            </a>
-        </div>
-        <div class="task">
-            <a href="">
-                <label>
-                    <input type="checkbox">Finish the Project
-                </label>
-            </a>
-            <a href="" title="Delete Task">
-            <span class="material-symbols-outlined">
-                delete
-            </span>
-            </a>
-        </div>
-        <div class="task">
-            <a href="">
-                <label>
-                    <input type="checkbox">Finish the Project
-                </label>
-            </a>
-            <a href="" title="Delete Task">
-            <span class="material-symbols-outlined">
-                delete
-            </span>
-            </a>
-        </div>
-        <div class="task">
-            <a href="">
-                <label>
-                    <input type="checkbox">Finish the Project
-                </label>
-            </a>
-            <a href="" title="Delete Task">
-            <span class="material-symbols-outlined">
-                delete
-            </span>
-            </a>
-        </div>
-        <div class="task">
-            <a href="">
-                <label>
-                    <input type="checkbox">Finish the Project
-                </label>
-            </a>
-            <a href="" title="Delete Task">
-            <span class="material-symbols-outlined">
-                delete
-            </span>
-            </a>
-        </div>
-        <div class="task">
-            <a href="">
-                <label>
-                    <input type="checkbox">Finish the Project
-                </label>
-            </a>
-            <a href="" title="Delete Task">
-            <span class="material-symbols-outlined">
-                delete
-            </span>
-            </a>
-        </div>
-        <div class="task">
-            <a href="">
-                <label>
-                    <input type="checkbox">Finish the Project
-                </label>
-            </a>
-            <a href="" title="Delete Task">
-            <span class="material-symbols-outlined">
-                delete
-            </span>
-            </a>
-        </div>
-        <div class="task">
-            <a href="">
-                <label>
-                    <input type="checkbox">Finish the Project
-                </label>
-            </a>
-            <a href="" title="Delete Task">
-            <span class="material-symbols-outlined">
-                delete
-            </span>
-            </a>
-        </div>
-        <div class="task">
-            <a href="">
-                <label>
-                    <input type="checkbox">Finish the Project
-                </label>
-            </a>
-            <a href="" title="Delete Task">
-            <span class="material-symbols-outlined">
-                delete
-            </span>
-            </a>
-        </div>
-        <div class="task">
-            <a href="">
-                <label>
-                    <input type="checkbox">Finish the Project
-                </label>
-            </a>
-            <a href="" title="Delete Task">
-            <span class="material-symbols-outlined">
-                delete
-            </span>
-            </a>
-        </div>
-        <div class="task">
-            <a href="">
-                <label>
-                    <input type="checkbox">Finish the Project
-                </label>
-            </a>
-            <a href="" title="Delete Task">
-            <span class="material-symbols-outlined">
-                delete
-            </span>
-            </a>
-        </div>
+        </c:forEach>
+
     </section>
     <section id="completed-task">
         <h2>Completed Tasks</h2>
@@ -225,30 +104,7 @@ task_alt
             </span>
             </a>
         </div>
-        <div class="task completed">
-            <a href="">
-                <label>
-                    <input type="checkbox">Finish the Project
-                </label>
-            </a>
-            <a href="" title="Delete Task">
-            <span class="material-symbols-outlined">
-                delete
-            </span>
-            </a>
-        </div>
-        <div class="task completed">
-            <a href="">
-                <label>
-                    <input type="checkbox">Finish the Project
-                </label>
-            </a>
-            <a href="" title="Delete Task">
-            <span class="material-symbols-outlined">
-                delete
-            </span>
-            </a>
-        </div>
+
 
     </section>
 
