@@ -1,0 +1,144 @@
+* {
+    box-sizing: border-box;
+
+}
+
+html {
+    font-family: 'Poppins', sans-serif;
+}
+
+h1 {
+    font-size: 2rem;
+    padding: 10px;
+    text-align: center;
+    margin-top: 0.75rem;
+}
+
+h2 {
+    font-size: 1.5rem;
+}
+
+h1, h2 {
+    font-weight: bold;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+form {
+    margin-top: 0.5rem;
+    display: flex;
+    padding: 10px 15px;
+    gap: 5px;
+}
+
+form input {
+    flex-grow: 1;
+    padding: 10px;
+    font-family: inherit;
+    font-size: 1rem;
+    border: 2px solid lightgray;
+    border-radius: 5px;
+    outline: none;
+
+}
+
+form input:is(:hover,:focus) {
+    border-color: dodgerblue;
+    box-shadow: 0 0 5px dodgerblue;
+}
+
+form button {
+    font-family: inherit;
+    font-size: 1rem;
+    background-color: dodgerblue;
+    color: white;
+    border: 2px solid dodgerblue;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 300ms 20ms ease-in-out;
+    margin-left: 0.7rem;
+
+
+}
+
+form button:hover {
+    background-color: rgba(30, 144, 255, 0.75);
+    box-shadow: 0 0 5px dodgerblue;
+    transform: scale(1.03);
+}
+
+form button:active {
+    background-color: rgba(10, 10, 220, 0.95);
+    border: 2px solid rgba(10, 10, 220, 0.95);
+    /*transform: scale(1.05);*/
+}
+
+#tasks, #completed-task {
+    padding: 10px 15px;
+}
+
+.task {
+    display: flex;
+    padding: 10px 0;
+}
+
+.task label {
+    cursor: pointer;
+}
+
+.task:hover label {
+    color: dodgerblue;
+
+}
+
+.task a:last-child:hover {
+    color: red;
+}
+
+.task a:first-child {
+    flex-grow: 1;
+}
+
+.task.completed {
+    text-decoration: line-through;
+
+}
+
+.task.completed:hover label {
+    color: #8a8a8a;
+}
+
+#completed-task h2 {
+    text-align: center;
+    padding: 10px;
+
+}
+footer{
+    text-align: center;
+    border-top: 1px solid lightgrey;
+    padding: 10px;
+
+}
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+}
+main{flex-grow: 1}
+header {
+    position: sticky;
+    top: 0;
+    background-color: rgba(255, 255, 255, 0.91);
+}
+header h1 span {
+    vertical-align:center;
+    color: dodgerblue;
+}
+#hint {
+    text-align: center;
+    color:#3b3b3b;
+}
